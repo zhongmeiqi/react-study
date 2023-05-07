@@ -15,9 +15,23 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
     <!-- Don't use this in production: -->
-    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 做语法转换 他将你书写的一种语法 变成另一种语法，更多的时候我们用babel来做语法降级，在当前这个场景里，我们用babel来处理jsx-->
 
-    <script>
+    <!-- 挂上 type="text/babel" 意味着babel将接管这块的所有代码的解析 
+         浏览器会看script的type再决定解不解析 如果不写type type默认为text/javascript 此时浏览器以js方式解析
+         如果type="module"，意味着以es6module方式解析
+         如果不是module也不是text/javascript这两个，浏览器就完全不会看script标签里的代码
+
+         有两种转换方式方式，这里是第一种，还有一种是cli 脚手架里面的
+         babel 会监听全局的document.contentLoad 【意味着当前页面的所有script标签全部生成完毕】
+         babel直接拿到所有的script标签 document.getElementByTagName
+         读script上的属性 getAttribute("type")
+         如果他发现type = text/babel
+         他把里面的代码全部都拿过来 然后用他自己的transform方法转换一遍 
+         将转换后的代码直接新建一个script标签插入到head标签里
+    -->
+    <script type="text/babel">
         console.log("React", React, ReactDOM)
         // 第一个参数：React 工作节点 也是我们所说的React工作开始的地方
         // 第二个参数：必须是React元素（通过React核心包的createElement所生成的元素叫做React元素）
@@ -29,7 +43,12 @@
         // console.log("reactDivElement", reactDivElement)
 
         /*React 18  */
-        const reactDivElement = React.createElement("div", {}, "hello react")
+        const reactDivElement =(
+            <div>
+                hello jsx
+                <span>i an child span</span>
+            </div>
+        )
         const root = ReactDOM.createRoot(document.getElementById("root"))
         console.log('reactDivElement', reactDivElement)
         root.render(reactDivElement)
@@ -38,3 +57,23 @@
 </body>
 
 </html>
+
+浏览器兼容性不是很好的时候 es6
+const fn = ()=>{}
+
+function fn(){}
+
+
+xxx.vue 这种书写方式不能称之为vue的侵入性 这种写法不是vue的原生写法
+至于他的更上层写法我们不用关注 因为那些都是方便我们更好地书写代码
+<template></template>
+
+<script></script>
+
+<style></style>
+
+vue-compiler 工具包 node服务端执行的fs 读文件 读出来的文件内容以字符串形式存在
+
+vue-compiler 做匹配 js find include 正则匹配 ===> replace ===> 最终会变成原生的vue写法 new Vue({
+template
+})
