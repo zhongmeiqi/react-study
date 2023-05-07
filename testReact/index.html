@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+
+    <script>
+        console.log("React", React, ReactDOM)
+        // 第一个参数：React 工作节点 也是我们所说的React工作开始的地方
+        // 第二个参数：必须是React元素（通过React核心包的createElement所生成的元素叫做React元素）
+        // render 它会拿到对应的react工作节点 然后他将对应的react元素去变成浏览器宿主所能接受的真实dom元素
+        // 这个生成的对象可以和任何宿主对应的转换
+
+        // const reactDivElement = React.createElement("div", {}, "hello react")
+        // ReactDOM.createRoot(document.getElementById("root"), reactDivElement);
+        // console.log("reactDivElement", reactDivElement)
+
+        /*React 18  */
+        const reactDivElement = React.createElement("div", {}, "hello react")
+        const root = ReactDOM.createRoot(document.getElementById("root"))
+        console.log('reactDivElement', reactDivElement)
+        root.render(reactDivElement)
+    </script>
+
+</body>
+
+</html>
