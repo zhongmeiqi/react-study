@@ -3,7 +3,7 @@ import { useState } from "react";
 
 // Counter组件可以用在任何你需要计数的地方
 
-export default function Counter(){
+export default function Counter(props){
 /* 
     count的值变动了，count虽然是Counter内部的数据，但是他凭什么能够让React去重新渲染组件呢
     我们要知道 函数组件内部的数据有很多种，那我们要选能够通知React去重新渲染组件的状态
@@ -19,7 +19,8 @@ export default function Counter(){
 } */
 // 这段代码是百分之百执行的，但是useState内部的初始化工作不会再做了
 
-let [count,setCount] = useState(0);//调用React的useState函数去生成了一个数据
+let [count,setCount] = useState(props.defaultValue||0);//调用React的useState函数去生成了一个数据
+console.log("组件渲染",props)
 const increase = ()=>{
     // 这里我们虽然改变了count的值，但是没有让Counter组件重新执行 count+=1 
      
@@ -56,6 +57,7 @@ window.getCount=()=>{
             <button onClick={increase}>+</button>
             <span>{count}</span>
             <button onClick={decrease}>-</button>
+            <span>{props.defaultValue}</span>
 
         </div>
     )
