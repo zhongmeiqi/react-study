@@ -36,7 +36,7 @@ requestIdleCallback(() => {
 
   // 阻止app这个元素的事件冒泡
   app.addEventListener("click", (e) => {
-    e.stopPropagation(); // 意味着app的所有父级元素的点击事件就不会被冒泡触发
+    // e.stopPropagation(); // 意味着app的所有父级元素的点击事件就不会被冒泡触发
     // 因为app的父级就是root元素，如果我们给真实dom取消了事件冒泡，那该真实dom的事件全部都不会往上冒泡
   });
 
