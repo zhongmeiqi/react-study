@@ -52,8 +52,29 @@ window.getCount=()=>{
     count---> 0 如果我们想要页面里发生一点显示效果的变化，我们得让React.createElement这段代码重复执行
     渲染 === 执行 / 重新渲染 === 函数组件的重新执行
 */
+
+    // 假设下面这段代码是react 16.8 不是18！！！ 
     return (
-        <div>
+        <div onClick={(e)=>{// event不是原生的document，只是react元素的event event是不是要重新捏
+            // 把button的event拿过来 只是把里面对应的要动态变动的属性改了 obj.xxx event.xxx = xx  比如 event.target ="div"
+            console.log('div click')
+
+            // 异步！！！
+            setTimeout(()=>{
+                // 异步的方式去读取事件源对象的属性是会失败的
+                e.xxx=null
+            },0)
+
+
+
+            e.stopPropagation();//都不是原生的e.stopPropagation 只是属性名一样而已，所以你在这里stopPropagation是没法阻止这个div 对应的react元素对应的真实元素的事件冒泡的
+        }}>
+            {/* 标签属性：标签属性会被React自行处理的  */}
+            <button onClick={(e)=>{
+                // e.target ===button
+                console.log('button',e.target)
+                }}>  </button>
+
             <button onClick={increase}>+</button>
             <span>{count}</span>
             <button onClick={decrease}>-</button>
