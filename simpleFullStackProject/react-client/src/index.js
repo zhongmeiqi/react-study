@@ -29,8 +29,6 @@ root.render(
 
 // 暂时的把它理解为setTimeout(()=>{},0) 你不懂浏览器渲染帧的话，那就这么理解
 requestIdleCallback(() => {
-  console.log("app dom111", document.getElementsByClassName("app")[0]);
-
   // 接下来的只是 就是和事件有关的
   const app = document.getElementsByClassName("app")[0];
 

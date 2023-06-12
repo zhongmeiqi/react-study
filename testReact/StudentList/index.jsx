@@ -19,14 +19,21 @@ export default function StudentList(){
     useEffect(()=>{
         // 在这里向服务器获取学生列表
          getStudentListFromServer()
-         const studentListDom = document.getElementsByClassName(
-            "student-list-wrapper"
-          )[0];
-          console.log(studentListDom)
 
-          document.onkeydown=(e)=>{
+        /*   document.onkeydown=(e)=>{
+            console.log('hello key down')
+          } */
+
+          const eventHandler = (e)=>{
             console.log('hello key down')
           }
+          document.addEventListener('keydown',eventHandler) ;
+
+        //  要不返回undefined，要不返回一个函数
+        return()=>{
+            document.removeEventListener('keydown',eventHandler)
+        }
+
     },[]) // 依赖也必须是react构建出来的数据 useState
 
 
