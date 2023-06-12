@@ -8,5 +8,5 @@ const axiosInstance = axios.create({
 });
 
 export const getStudentList = () => {
-  return axios.get("/studentList");
+  return axios.get("/api/student");
 };

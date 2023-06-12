@@ -6,7 +6,15 @@ koaApp.listen(8888, () => {
   console.log("koa started at 8888");
 });
 
-koaApp.use((ctx) => {
+function delay(duration = 2000) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true);
+    }, duration);
+  });
+}
+
+koaApp.use(async (ctx) => {
   console.log("ctx", ctx);
 
   const { path } = ctx;
@@ -16,7 +24,7 @@ koaApp.use((ctx) => {
     // 返回数据,require不一定非要写在顶部，写在中间也可以
     const jsonData = require("./student.json");
     console.log("jsonData", jsonData);
-
+    await delay(2000);
     // 返回给客户端
     ctx.response.body = jsonData;
   }
