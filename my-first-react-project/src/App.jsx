@@ -1,33 +1,22 @@
-import Counter from "./component/Counter";
-import {useState} from "react"
-
+import { useEffect,useState } from "react"
+import StudentList from "./component/StudentList"
 
 function App() {
 
+    const [bool,setBool] = useState(true)
 
-/*
-    let countValue = 10  
-    const handleClick = ()=>{
-    countValue ++
-  } */
-  const [countValue,setCountValue] = useState(10)
-const handleClick = ()=>{
-  setCountValue(prev=>prev+1)
-}
-  
-  return (
-    // 这个div不是真正的dom元素，而是react元素
-    <div>
-      <Counter defaultValue={countValue}/>
-      <Counter defaultValue={countValue}/>
-      <Counter />
 
-      <button onClick={handleClick}>点击我</button>
 
-      {/* document.addEventListener("click") */}
-    </div>
-    // 如果是大写开头的 React默认为组件
-  );
+    useEffect(()=>{
+        console.log('hello App')
+    },[bool])
+   
+    return (
+        <div>
+            <button onClick={()=>setBool(()=>!bool)}>click me</button> 
+            <StudentList />
+        </div>
+   )
 }
 
 export default App;
