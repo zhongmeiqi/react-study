@@ -27,10 +27,11 @@ const increase = ()=>{
     // 这个count的值是异步更新的
     setCount(pre=>pre+1) // 只要你调用了setCount函数去对数据产生了变动，那么当前使用了该状态的React组件就会重新渲染
     setCount(pre=>pre+1)
-    console.log(11)
+    // console.log(11)
+    
     // 增加 每一次都在上一次的值上面+1,
-    /* setCount(count+1)
-    setCount(count+1) */
+    // setCount(count+1)
+    // setCount(count+1) 
 
   /*   function setCount(newValue){
         count = newValue;
