@@ -1,5 +1,5 @@
 // deps
-import { useEffect,useState } from "react"
+import { useCallback, useEffect,useMemo,useState } from "react"
 
 // api
 import { getStudentList } from "../../request"
@@ -16,14 +16,27 @@ export default function StudentList(){
 
     const {loading,executeRequest} = useRequestLoadingDispatcher()
 
+    /* const [studentNameListState,setStudentNameList] = useState([])
 
-    const fetchStudentFromServer = async()=>{
-        executeRequest(async()=>{
-            const studentResponse = await getStudentList();    
-            setStudentList(studentResponse.data)
-        })
-        
-    }
+    useEffect(()=>{
+        const _studentNameList = studentList.map(stu=>stu.name)
+        setStudentNameList(_studentNameList)
+    },[studentList]) // 从逻辑上来讲，就是studentNameList --->一定会依赖于这个studentList这个数据 */
+
+
+
+    // 需求：只需要拿studentList里面的每个学生的name，然后去做其他事情
+    const studentNameList = useMemo(()=>studentList.map(stu=>stu.name),[studentList]);// 我们想留存他的引用
+
+
+    const fetchStudentFromServer = useCallback(async()=>{
+
+            executeRequest(async()=>{
+                const studentResponse = await getStudentList();    
+                setStudentList(studentResponse.data)
+            }) 
+        },[executeRequest]
+    ) 
 
     useEffect(()=>{
         // 之前是setTimeout模拟，现在是在本地搭建一个服务器
@@ -38,6 +51,7 @@ export default function StudentList(){
                     })
                 )   
             }
+            {studentNameList}
         </div>
     )
 }
