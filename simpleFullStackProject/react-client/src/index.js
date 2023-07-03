@@ -47,7 +47,8 @@ requestIdleCallback(() => {
 
     1、这个button没有绑定任何的真实事件
     2、冒泡到app dom，触发真实dom的事件处理函数 app dom click
-    3、冒泡到root元素，root元素开始根据对应的event.target进行事件的处理 进行对应的【标签属性事件】的触发 eventHandlers.forEach(eventH=>const eventObj = createEventObj(),eventH(eventObj))
+    3、冒泡到root元素，root元素开始根据对应的event.target进行事件的处理 进行对应的【标签属性事件】的触发 
+    eventHandlers.forEach(eventH=>const eventObj = createEventObj(),eventH(eventObj))
   */
 });
 

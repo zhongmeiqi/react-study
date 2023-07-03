@@ -27,7 +27,7 @@ const handleClick = ()=>{
       {/* 
       1、我们给Counter组件挂了一个onClick的组件属性
       2、这个组件属性会被作为参数传递给Counter函数
-      3、我们有在COunter组件里去使用props.onClick嘛？
+      3、我们有在Counter组件里去使用props.onClick嘛？
       */}
       <Counter onClick={handleClick}/>
 
