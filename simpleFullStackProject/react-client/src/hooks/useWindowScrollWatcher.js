@@ -5,7 +5,7 @@ export default function useWindowScrollWatcher(scrollCallback) {
     document.addEventListener("scroll", scrollCallback);
 
     return () => {
-      document.removeEventListener(scrollCallback);
+      // document.removeEventListener(scrollCallback);
     };
   });
 }

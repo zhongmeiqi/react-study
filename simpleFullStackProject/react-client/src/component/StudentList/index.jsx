@@ -46,8 +46,8 @@ export default function StudentList(){
     return (
         <div>
             {
-                loading? <div>正在加载中...</div>:( studentList.map((student)=>{
-                        return <StudentItem {...student}/>
+                loading? <div>正在加载中...</div>:( studentList.map((student,idx)=>{
+                        return <StudentItem key={idx} {...student}/>
                     })
                 )   
             }
