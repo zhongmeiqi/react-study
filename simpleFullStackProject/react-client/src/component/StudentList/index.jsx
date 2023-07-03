@@ -10,7 +10,7 @@ import useRequestLoadingDispatcher from "../../hooks/useRequestLoadingDispatcher
 
 // 登录 登录中loading；提交表单 loading
 
-export default function StudentList(){
+export default function StudentList(props){
     // 宁愿敲错，也不要什么都不做
     const [studentList,setStudentList] = useState([])
 
@@ -41,13 +41,13 @@ export default function StudentList(){
     useEffect(()=>{
         // 之前是setTimeout模拟，现在是在本地搭建一个服务器
         fetchStudentFromServer()
-    },[])
+    },[fetchStudentFromServer])
 
     return (
         <div>
             {
                 loading? <div>正在加载中...</div>:( studentList.map((student,idx)=>{
-                        return <StudentItem key={idx} {...student}/>
+                        return <StudentItem  key={idx} {...student}/>
                     })
                 )   
             }
