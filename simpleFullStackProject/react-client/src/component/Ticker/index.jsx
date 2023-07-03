@@ -13,7 +13,7 @@ export default function Ticker(){
 
     const [timeCount,setTimeCount] = useState(60)
     const timerIdRef = useRef(1);
-    console.log('timerIRef',timerIdRef)
+    // console.log('timerIRef',timerIdRef)
 
 
 

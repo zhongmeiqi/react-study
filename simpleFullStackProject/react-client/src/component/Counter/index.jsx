@@ -1,9 +1,25 @@
-import { useCallback, useState } from "react";
+import { forwardRef, useCallback, useState,useImperativeHandle } from "react";
+// import ForceUpdate from "../ForceUpdateTest";
+import useForceUpdate from "../../hooks/useForceUpdate";
 
-export default function Counter(){
+ function Counter(props,ref){
+    console.log(props.defaultCount)
 
     const [count,setCount] = useState(0);
 
+    const forceUpdate = useForceUpdate();
+
+    // 需求：父组件要拿到子组件提供的一个密钥 这个密钥是通过count + 一个随机字符串生成的
+    // 同时count如果不变，则这个密钥是不会变的
+
+    // ref.current = count + Math.random(); // 每次函数组件的重新渲染都会将它重新赋值 会造成一些问题
+    
+    // 第一个参数ref:意味着他在底层会去改你这个ref的current属性
+    // 第二个参数是一个函数：这个函数的返回值最终会被丢到这个ref.current属性上去
+    // 第三个参数是依赖项：重头戏 意味着依赖项不变的化 ref的current值不会被重新赋值
+    useImperativeHandle(ref,()=>{
+        return count+ Math.random()
+    },[count])
     const addCount=useCallback(()=>{
         setCount(prev=>prev+1)
     },[])
@@ -21,7 +37,9 @@ export default function Counter(){
         <div>
             <span>{count}</span>
             <button onClick={addCount}>add  count</button>
-            <button onClick={getCountValue}>get counte value</button>
+            <button onClick={forceUpdate}>强制刷新Counter组件</button>
         </div>
     )
 }
+
+export default forwardRef(Counter)

@@ -17,6 +17,7 @@ ClassComponent--->是一个构造函数，new一个实例出来，挂上ref之�
 function App(){
     const divRef = useRef(null)
     const testInputRef = useRef(null);
+    const counterRef = useRef(null);
 
     useEffect(()=>{
         // 要等到节点渲染出来
@@ -32,13 +33,15 @@ function App(){
         // divElementRef.current.innerHTML = 'hello'
         console.log('TestInput',testInputRef)
         // testInputRef.current.focus()
+
+        console.log('counterRef',counterRef)
     },[])
 
     return (
         <div ref={divRef} className="wrapper">
             <StudentList />
             <ForceUpdate />
-            <Counter/>
+            <Counter defaultCount={10} ref={counterRef}/>
             <Ticker/>
             <Ticker/>
             {/* 给组件ref 函数组件就是一个函数 一个函数的执行我们无非可以得到两个东西：1.函数的引用 2.返回值 上下文*/}
