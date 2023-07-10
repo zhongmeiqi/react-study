@@ -1,5 +1,5 @@
 // deps
-import { useCallback, useEffect,useMemo,useState } from "react"
+import { useCallback, useEffect,useMemo,useState,useLayoutEffect } from "react"
 
 // api
 import { getStudentList } from "../../request"
@@ -33,19 +33,40 @@ export default function StudentList(props){
 
             executeRequest(async()=>{
                 const studentResponse = await getStudentList();    
-                setStudentList(studentResponse.data)
+                // setStudentList(studentResponse.data)
+                setStudentList([])
+
             }) 
         },[executeRequest]
     ) 
 
+    // 先显示了暂无学生数据
+    // 在现实了正在加载中
+    // 最后显示了对应的学生列表
     useEffect(()=>{
         // 之前是setTimeout模拟，现在是在本地搭建一个服务器
         fetchStudentFromServer()
-    },[fetchStudentFromServer])
+    },[])
+    /* useLayoutEffect(()=>{
+        // 之前是setTimeout模拟，现在是在本地搭建一个服务器
+        fetchStudentFromServer()
+    },[]) */
+    // 再引入一个逻辑，就是假设这个studentList为空，studentList.length ===0
+    // 显示暂无学生数据，否则显示学生列表
+    // 用一种比较刁钻的方式来写，因为只有这样写才能够体现出useEffect和useLayoutEffect的差别
+
+    // 模拟一种情况，让页面渲染非常多的东西，一旦渲染的东西多了，渲染时长必定是要变长的
+    // 渲染一个大型项目->2s，但是我们这个demo渲染出来只要0.5s，我们只需要想办法拖延1.5s就可以模拟大型项目了
+    for(let i = 0;i<50000;i++){
+        console.log(i)
+    }
+    
+    
 
     return (
         <div>
-            {
+            {!loading && studentList.length ===0 && <div>暂无学生数据</div>}
+           {loading.toString()} {
                 loading? <div>正在加载中...</div>:( studentList.map((student,idx)=>{
                         return <StudentItem  key={idx} {...student}/>
                     })
