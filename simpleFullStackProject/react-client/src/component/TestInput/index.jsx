@@ -29,15 +29,23 @@ function TestInput(props,parentRef){
         parentRef.current = 1
     }, [parentRef])
 
-    
+    const handleInput = useCallback(()=>{
+        console.log('用户对应的输入事件触发')
+    },[])
 
+    // 来顶帧
+    const handleClick = useCallback(()=>{
+        for(let i=0;i<50000;i++){
+            console.log('222')
+        }
+    },[])
     return (
         <div ref={divElementRef}>
             {/* 拿到input的真实dom 去调用真实dom上的focus方法 */}
             {/* 它使用了useEffect去帮你获取真实dom并且赋值 */}
             {/* <input ref={parentRef} className="input-example" type="text" /> */}
-            <input  className="input-example" type="text" />
-
+            <input onChange={handleInput} className="input-example" type="text" />
+        <button onClick={handleClick}>click me</button>
         </div>
     )
 }

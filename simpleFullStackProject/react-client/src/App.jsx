@@ -49,18 +49,18 @@ function App(){
     return (
         <div ref={divRef} className="wrapper">
             <ThemeContext.Provider value={theme}>
-                <StudentList />
+                {/* <StudentList />
                 <ForceUpdate />
                 <Counter defaultCount={10} ref={counterRef}/>
                 <Ticker/>
-                <Ticker/>
+                <Ticker/> */}
                 {/* 给组件ref 函数组件就是一个函数 一个函数的执行我们无非可以得到两个东西：1.函数的引用 2.返回值 上下文*/}
                 {/* 返回值是要渲染到页面里的元素，也不能给你 */}
                 {/* 函数的上下文随着函数的执行而创建 随着函数的执行完毕而销毁 */}
                 {/* 但是有一种场景是有必要的，父组件想要去访问子组件的一些东西【这节课先说真实DOM】 */}
                 <TestInput ref={testInputRef}/>
                 {/* <button onClick={handleClick}>click me</button> */}
-                <button onClick={changeTheme}>change theme</button>
+                {/* <button onClick={changeTheme}>change theme</button> */}
             </ThemeContext.Provider>
 
         </div>
