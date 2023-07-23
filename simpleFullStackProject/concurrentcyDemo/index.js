@@ -13,13 +13,11 @@ function Counter() {
     React.createElement("button", {}, "click me")
   ); */
   return {
-    children: {
-      type: "span",
-      value: "helloworld", // fiber里是区分文本节点和react元素节点
-      next: {
-        type: "button",
-        value: "click me",
-      },
+    type: "span",
+    value: "helloworld", // fiber里是区分文本节点和react元素节点
+    next: {
+      type: "button",
+      value: "click me",
     },
   };
 }
@@ -50,11 +48,12 @@ function performUnitOfWork(deadLine) {
     return;
   }
   //   当前有工作，我们还要看一个东西 这个东西不确定
-  if (deadLine.didTimeout) {
+  if (deadLine.timeRemaining() < 1) {
+    // 返回当前帧还剩余的毫秒，
     // 没有空闲时间
     // 我们把任务推进到下一帧执行
 
-    // 这样做的我话们是不是本来应该在一帧内执行完成的渲染任务分到多帧去了
+    // 这样做的我们是不是本来应该在一帧内执行完成的渲染任务分到多帧去了
 
     // 假设当前帧没有时间了 ---> 渲染工作停了 是不是好像就是中断了
     requestIdleCallback(executeWorkLoop); // 把span推向下一帧
@@ -104,7 +103,7 @@ presentWork = CounterElementDescriptors;
 
 //  执行我们自己的工作的时候，去将一个大的任务拆分成多个任务去执行，让每一帧的最大可渲染单元为组件
 // 【当然如果本帧时间充裕的话是会渲染多个组件的，但是只要发现不充裕，立马推入下一帧】如果有连续两帧都没时间，是不是渲染就被推后两帧，是不是有意味着停止了两帧没有进行渲染工作，停止就是中断
-// 座椅这就是可中断渲染
+// 所以这就是可中断渲染
 
 function executeWorkLoop(deadLine) {
   console.log("executeWorkLoop", deadLine);
@@ -131,7 +130,7 @@ function commitRoot(_rootElement) {
     console.log("come in", renderChildrenElement, elementContainer);
     elementContainer.appendChild(renderChildrenElement.dom);
     renderChildrenElement = renderChildrenElement.next;
-  } while (renderChildrenElement.next);
+  } while (renderChildrenElement);
 }
 
 render(document.getElementById("root"));

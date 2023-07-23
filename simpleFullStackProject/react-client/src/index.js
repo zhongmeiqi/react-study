@@ -3,17 +3,22 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 // StrictMode ：React严格模式 js的严格模式
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  //在进行渲染的工作：渲染-->将你写的JSX（虚拟DOM）转换成页面真实DOM的工作叫做渲染
-  <div className="app">
-    {/* <App /> ==== {App()},但是不要用执行的方式使用组件，这会React找不到对应的组件树 都用<Component />*/}
 
-    <App />
-  </div>
-);
+function render() {
+  root.render(
+    //在进行渲染的工作：渲染-->将你写的JSX（虚拟DOM）转换成页面真实DOM的工作叫做渲染
+    <div className="app">
+      {/* <App /> ==== {App()},但是不要用执行的方式使用组件，这会React找不到对应的组件树 都用<Component />*/}
 
+      <App />
+    </div>
+  );
+}
+
+render();
+
+window.render = render;
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
@@ -53,4 +58,3 @@ requestIdleCallback(() => {
 });
 
 // 冒泡--->一个事件从子元素依次向父元素传播 这个叫做冒泡 如果阻止冒泡，则事件不会向该元素的父级传播
-
