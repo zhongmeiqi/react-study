@@ -1,0 +1,25 @@
+
+@primary-color:#1e90ff;
+@hover-color: #82aeda;
+.wrapper {
+  width: 100px;
+  height: 44px;
+  background-color: @primary-color;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 44px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s;
+  user-select: none;
+}
+.wrapper:hover {
+  background-color: @hover-color;
+}
+
+.wrapper:active {
+  background-color: @hover-color;
+  transform: scale(0.9);
+}
+
