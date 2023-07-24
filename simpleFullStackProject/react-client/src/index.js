@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./assests/CSS/init.css";
 
 // StrictMode ：React严格模式 js的严格模式
 const root = ReactDOM.createRoot(document.getElementById("root"));
